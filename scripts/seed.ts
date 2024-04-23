@@ -13,6 +13,9 @@ async function main() {
         { name: "Accounting" },
         { name: "Engineering" },
         { name: "Filming" },
+        { name: "WhyGuru Course" },
+        { name: "Sikhi" },
+        { name: "Basics" },
       ]
     });
 
