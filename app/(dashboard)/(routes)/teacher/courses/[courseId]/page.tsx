@@ -14,6 +14,7 @@ import { PriceForm } from "./_components/price-form";
 import { AttachmentForm } from "./_components/attachment-form";
 import { ChaptersForm } from "./_components/chapters-form";
 import { Actions } from "./_components/actions";
+import { VideoEmbedForm } from "./_components/video-embed-form";
 
 const CourseIdPage = async ({
   params
@@ -108,6 +109,12 @@ const CourseIdPage = async ({
             />
             <DescriptionForm
               initialData={course}
+              courseId={course.id}
+            />
+            <VideoEmbedForm
+              initialData={{
+                videoEmbedCode: course.videoEmbedCode || "",
+              }}
               courseId={course.id}
             />
             <ImageForm

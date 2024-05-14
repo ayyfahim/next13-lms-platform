@@ -14,6 +14,7 @@ model Course {
   userId String
   title String @db.Text
   description String? @db.Text
+  videoEmbedCode String? @db.Text
   imageUrl String? @db.Text
   price Float?
   isPublished Boolean @default(false)
@@ -60,6 +61,7 @@ model Chapter {
   position Int
   isPublished Boolean @default(false)
   isFree Boolean @default(false)
+  videoEmbedCode String? @db.Text
 
   muxData MuxData?
 

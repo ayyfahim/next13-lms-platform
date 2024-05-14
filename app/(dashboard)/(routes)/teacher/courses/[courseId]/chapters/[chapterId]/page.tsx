@@ -12,6 +12,7 @@ import { ChapterDescriptionForm } from "./_components/chapter-description-form";
 import { ChapterAccessForm } from "./_components/chapter-access-form";
 import { ChapterVideoForm } from "./_components/chapter-video-form";
 import { ChapterActions } from "./_components/chapter-actions";
+import { ChapterVideoEmbedForm } from "./_components/chapter-video-embed-form";
 
 const ChapterIdPage = async ({
   params
@@ -41,7 +42,7 @@ const ChapterIdPage = async ({
   const requiredFields = [
     chapter.title,
     chapter.description,
-    chapter.videoUrl,
+    chapter.videoEmbedCode,
   ];
 
   const totalFields = requiredFields.length;
@@ -128,10 +129,10 @@ const ChapterIdPage = async ({
                 Add a video
               </h2>
             </div>
-            <ChapterVideoForm
+            <ChapterVideoEmbedForm
               initialData={chapter}
-              chapterId={params.chapterId}
               courseId={params.courseId}
+              chapterId={params.chapterId}
             />
           </div>
         </div>
