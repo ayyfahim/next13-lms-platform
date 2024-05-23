@@ -19,10 +19,15 @@ export const SidebarItem = ({
   const pathname = usePathname();
   const router = useRouter();
 
-  const isActive =
+  let isActive =
     (pathname === "/" && href === "/") ||
     pathname === href ||
     pathname?.startsWith(`${href}/`);
+
+    
+  if (label == "Browse") {
+    isActive = pathname?.startsWith(`/courses/`);
+  }
 
   const onClick = () => {
     router.push(href);

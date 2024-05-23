@@ -7,6 +7,36 @@ interface GetChapterProps {
   chapterId: string;
 };
 
+interface GetPurchaseProps {
+  userId: string;
+  courseId: string;
+};
+
+export const getPurchase = async ({
+  userId,
+  courseId,
+}: GetPurchaseProps) => {
+  try {
+    const purchase = await db.purchase.findUnique({
+      where: {
+        userId_courseId: {
+          userId,
+          courseId,
+        }
+      }
+    });
+
+    return {
+      purchase,
+    };
+  } catch (error) {
+    console.log("[GET_CHAPTER]", error);
+    return {
+      purchase: null,
+    }
+  }
+}
+
 export const getChapter = async ({
   userId,
   courseId,
