@@ -6,19 +6,24 @@ import toast from "react-hot-toast";
 
 import { Button } from "@/components/ui/button";
 import { formatPrice } from "@/lib/format";
+import { useRouter } from "next/navigation";
 
 interface CourseEnrollButtonProps {
   price: number;
   courseId: string;
   purchase: any;
+  chapterId: string;
 }
 
 export const CourseEnrollButtonNew = ({
   price,
   courseId,
   purchase,
+  chapterId
 }: CourseEnrollButtonProps) => {
   const [isLoading, setIsLoading] = useState(false);
+
+  const router = useRouter();
 
   const onClick = async () => {
     try {
@@ -50,6 +55,8 @@ export const CourseEnrollButtonNew = ({
         stroke-linecap="round"
         stroke-linejoin="round"
         className="lucide lucide-play-circle h-4 w-4 mr-2"
+        
+        onClick={() => router.push(`/courses/${courseId}/chapters/${chapterId}`)}
       >
         <circle cx="12" cy="12" r="10"></circle>
         <polygon points="10 8 16 12 10 16 10 8"></polygon>

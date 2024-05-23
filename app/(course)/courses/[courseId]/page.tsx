@@ -16,9 +16,13 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   let purchase = null;
 
   if (userId) {
-    let { purchase } = await getPurchase({
-      userId,
-      courseId: params.courseId,
+    purchase = await db.purchase.findUnique({
+      where: {
+        userId_courseId: {
+          userId: userId,
+          courseId: params.courseId,
+        },
+      },
     });
   }
 
@@ -138,7 +142,12 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
                 speed, and more.
               </p>
             </div>
-            <CourseEnrollButtonNew courseId={course.id} price={course.price!} purchase={purchase} />
+            <CourseEnrollButtonNew
+              courseId={course.id}
+              price={course.price!}
+              purchase={purchase}
+              chapterId={course.chapters[0].id}
+            />
           </div>
           <div className="flex gap-x-2 items-center">
             <button className="cursor-pointer hover:opacity-75 transition w-full p-4 border rounded-md flex flex-col items-center gap-y-2 bg-white">

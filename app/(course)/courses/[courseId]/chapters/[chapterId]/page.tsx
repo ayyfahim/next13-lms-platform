@@ -36,7 +36,7 @@ const ChapterIdPage = async ({
     courseId: params.courseId,
   });
 
-  if (!chapter || !course) {
+  if (!chapter || !course || !purchase) {
     return redirect("/")
   }
 
