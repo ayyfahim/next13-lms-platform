@@ -18,6 +18,9 @@ model Course {
   imageUrl String? @db.Text
   price Float?
   isPublished Boolean @default(false)
+  githubLink String? @db.Text
+  discordLink String? @db.Text
+  youtubeLink String? @db.Text
 
   categoryId String?
   category Category? @relation(fields: [categoryId], references: [id])
