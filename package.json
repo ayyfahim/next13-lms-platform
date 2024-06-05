@@ -29,6 +29,7 @@
     "@types/node": "20.6.0",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
+    "@types/video.js": "^7.3.58",
     "@uploadthing/react": "^5.5.0",
     "autoprefixer": "10.4.15",
     "axios": "^1.5.0",
@@ -56,6 +57,8 @@
     "tailwindcss-animate": "^1.0.7",
     "typescript": "5.2.2",
     "uploadthing": "^5.5.3",
+    "video.js": "^8.12.0",
+    "videojs-youtube": "^3.0.1",
     "zod": "^3.22.2",
     "zustand": "^4.4.1"
   },

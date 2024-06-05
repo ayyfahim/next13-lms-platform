@@ -8,6 +8,10 @@ import { auth } from "@clerk/nextjs";
 import { BookOpen } from "lucide-react";
 import { redirect } from "next/navigation";
 import { CourseEnrollButtonNew } from "./_components/course-enroll-button";
+import videojs from "video.js";
+import { useRef } from "react";
+import VideoPlayer from "@/components/VideoJsPlayer";
+import VideoJsPlayer from "@/components/VideoJsPlayer";
 
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
   const { userId } = auth();
@@ -72,22 +76,24 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
     return redirect("/");
   }
 
+  const videoJsOptions = {
+    techOrder: ["youtube"],
+    sources: [
+      {
+        type: "video/youtube",
+        src: course.videoEmbedCode,
+      },
+    ],
+    youtube: { ytControls: 0, controls: 0 },
+  };
+
   return (
     <div>
       <div className="flex flex-wrap flex-row max-w-screen-xl mx-auto pb-20 p-6">
         <div className="w-3/5 space-y-6">
           {course.videoEmbedCode && (
-            <div className="relative aspect-video">
-              <div
-                className="rounded-lg overflow-hidden"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                }}
-                dangerouslySetInnerHTML={{
-                  __html: cssAppliedContent(course.videoEmbedCode),
-                }}
-              />
+            <div className="aspect-video">
+              <VideoJsPlayer options={videoJsOptions} />
             </div>
           )}
 
@@ -150,7 +156,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
           </div>
           <div className="flex gap-x-2 items-center">
             <a
-              href={course.githubLink ?? ''}
+              href={course.githubLink ?? ""}
               target="_blank"
               className="cursor-pointer hover:opacity-75 transition w-full p-4 border rounded-md flex flex-col items-center gap-y-2 bg-white"
             >
@@ -168,7 +174,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
               <span className="text-xs text-muted-foreground">Source code</span>
             </a>
             <a
-              href={course.discordLink ?? ''}
+              href={course.discordLink ?? ""}
               target="_blank"
               className="cursor-pointer hover:opacity-75 transition w-full p-4 border rounded-md flex flex-col items-center gap-y-2 bg-white"
             >
@@ -187,7 +193,7 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
               <span className="text-xs text-muted-foreground">Discord</span>
             </a>
             <a
-              href={course.youtubeLink ?? ''}
+              href={course.youtubeLink ?? ""}
               target="_blank"
               className="cursor-pointer hover:opacity-75 transition w-full p-4 border rounded-md flex flex-col items-center gap-y-2 bg-white"
             >
@@ -213,5 +219,4 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
 
   // return redirect(`/courses/${course.id}/chapters/${course.chapters[0].id}`);
 };
-
 export default CourseIdPage;

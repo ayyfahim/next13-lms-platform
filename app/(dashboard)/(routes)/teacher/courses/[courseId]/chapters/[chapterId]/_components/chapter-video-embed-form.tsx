@@ -67,14 +67,14 @@ export const ChapterVideoEmbedForm = ({
   return (
     <div className="mt-6 border bg-slate-100 rounded-md p-4">
       <div className="font-medium flex items-center justify-between">
-        Chapter Video Embed Code
+        Chapter Video Url
         <Button onClick={toggleEdit} variant="ghost">
           {isEditing ? (
             <>Cancel</>
           ) : (
             <>
               <Pencil className="h-4 w-4 mr-2" />
-              Edit Code
+              Edit Url
             </>
           )}
         </Button>
@@ -106,7 +106,7 @@ export const ChapterVideoEmbedForm = ({
                   <FormControl>
                     <Input
                       disabled={isSubmitting}
-                      placeholder="e.g. 'Embed code'"
+                      placeholder="e.g. https://"
                       {...field}
                     />
                   </FormControl>

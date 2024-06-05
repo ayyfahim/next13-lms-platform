@@ -9,6 +9,7 @@ import { Loader2, Lock } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { useConfettiStore } from "@/hooks/use-confetti-store";
+import VideoJsPlayer from "@/components/VideoJsPlayer";
 
 interface VideoPlayerProps {
   playbackId: string;
@@ -73,16 +74,21 @@ export const VideoPlayer = ({
     
     `;
 
+  const videoJsOptions = {
+    techOrder: ["youtube"],
+    sources: [
+      {
+        type: "video/youtube",
+        src: embedCode,
+      },
+    ],
+    youtube: { ytControls: 0, controls: 0 },
+  };
+
   if (!isLocked && embedCode) {
     return (
       <div className="relative aspect-video">
-        <div
-          style={{ 
-            width: "100%",
-            height: "100%"
-           }}
-          dangerouslySetInnerHTML={{ __html: cssAppliedContent(embedCode) }}
-        />
+        <VideoJsPlayer options={videoJsOptions} />
       </div>
     );
   } else {
