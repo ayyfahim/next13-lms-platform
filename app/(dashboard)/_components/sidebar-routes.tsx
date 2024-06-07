@@ -1,6 +1,15 @@
 "use client";
 
-import { BarChart, Compass, Layout, List } from "lucide-react";
+import {
+	BarChart,
+	Book,
+	CreditCard,
+	Headphones,
+	Layout,
+	List,
+	Phone,
+	Settings,
+} from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { SidebarItem } from "./sidebar-item";
@@ -12,9 +21,14 @@ const guestRoutes = [
 		href: "/",
 	},
 	{
-		icon: Compass,
-		label: "Browse",
-		href: "/search",
+		icon: Book,
+		label: "Courses",
+		href: "/courses",
+	},
+	{
+		icon: CreditCard,
+		label: "Payments",
+		href: "/payments",
 	},
 ];
 
@@ -31,6 +45,19 @@ const teacherRoutes = [
 	},
 ];
 
+const bottomRoutes = [
+	{
+		icon: Headphones,
+		label: "Support",
+		href: "/support",
+	},
+	{
+		icon: Settings,
+		label: "Settings",
+		href: "/settings",
+	},
+];
+
 export const SidebarRoutes = () => {
 	const pathname = usePathname();
 
@@ -39,15 +66,30 @@ export const SidebarRoutes = () => {
 	const routes = isTeacherPage ? teacherRoutes : guestRoutes;
 
 	return (
-		<div className='flex flex-col w-full gap-1'>
-			{routes.map((route) => (
-				<SidebarItem
-					key={route.href}
-					icon={route.icon}
-					label={route.label}
-					href={route.href}
-				/>
-			))}
+		<div className='flex flex-col h-full'>
+			<div className='grow flex flex-col w-full gap-1'>
+				{routes.map((route) => (
+					<SidebarItem
+						key={route.href}
+						icon={route.icon}
+						label={route.label}
+						href={route.href}
+					/>
+				))}
+			</div>
+			{/* BOTTOM ROUTES */}
+			<div className='border-[#d9d9d9]/30 border-t-[0.3px]'>
+				<div className='pt-[20px] w-full'>
+					{bottomRoutes.map((route) => (
+						<SidebarItem
+							key={route.href}
+							icon={route.icon}
+							label={route.label}
+							href={route.href}
+						/>
+					))}
+				</div>
+			</div>
 		</div>
 	);
 };

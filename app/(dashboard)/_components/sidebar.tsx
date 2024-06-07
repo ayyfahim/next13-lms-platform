@@ -7,7 +7,7 @@ export const Sidebar = () => {
 			<div className='mb-12'>
 				<Logo />
 			</div>
-			<div className='flex flex-col w-full'>
+			<div className='flex flex-col w-full grow'>
 				<SidebarRoutes />
 			</div>
 		</div>
