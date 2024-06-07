@@ -1,24 +1,28 @@
-import { Navbar } from "./_components/navbar";
+import { cn } from "@/lib/utils";
 import { Sidebar } from "./_components/sidebar";
-
-const DashboardLayout = ({
-  children
-}: {
-  children: React.ReactNode;
-}) => {
-  return ( 
-    <div className="h-full">
-      <div className="h-[80px] md:pl-56 fixed inset-y-0 w-full z-50">
+const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
+	return (
+		<div className='min-h-screen'>
+			{/* <div className="h-[80px] md:pl-56 fixed inset-y-0 w-full z-50">
         <Navbar />
-      </div>
-      <div className="hidden md:flex h-full w-56 flex-col fixed inset-y-0 z-50">
-        <Sidebar />
-      </div>
-      <main className="md:pl-56 pt-[80px] h-full">
-        {children}
-      </main>
-    </div>
-   );
-}
- 
+      </div> */}
+			<div className={cn("flex w-full flex-row flex-nowrap")}>
+				<div
+					className={cn(
+						"hidden md:flex basis-[320px] w-56 flex-col inset-y-0 z-50 sticky top-0"
+					)}>
+					<div className='h-screen sticky top-0'>
+						{/* BEGIN: Sidebar container */}
+						<div className='p-5 h-full'>
+							<Sidebar />
+						</div>
+						{/* END: Sidebar container */}
+					</div>
+				</div>
+				<main className={cn("h-full min-h-[200vh] grow")}>{children}</main>
+			</div>
+		</div>
+	);
+};
+
 export default DashboardLayout;
