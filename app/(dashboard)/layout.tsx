@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { Sidebar } from "./_components/sidebar";
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 	return (
-		<div className='min-h-screen bg-[#fcfcff]'>
+		<div className='min-h-screen bg-[#fcfcff] overflow-visible'>
 			{/* <div className="h-[80px] md:pl-56 fixed inset-y-0 w-full z-50">
         <Navbar />
       </div> */}
@@ -19,7 +19,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 						{/* END: Sidebar container */}
 					</div>
 				</div>
-				<main className={cn("h-full min-h-screen grow")}>{children}</main>
+				<main className={cn("min-h-screen grow")}>{children}</main>
 			</div>
 		</div>
 	);

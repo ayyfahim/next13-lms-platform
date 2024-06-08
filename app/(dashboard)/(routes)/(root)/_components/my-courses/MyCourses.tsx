@@ -1,18 +1,12 @@
-import { getDashboardCourses } from "@/actions/get-dashboard-courses";
-import { auth } from "@clerk/nextjs";
+import { CourseWithProgressWithCategory } from "@/actions/get-dashboard-courses";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import MyCourseItem from "./MyCourseItem";
 
-const MyCourses = async () => {
-	const { userId } = auth();
-	if (!userId) {
-		return redirect("/");
-	}
-	const { completedCourses, coursesInProgress } = await getDashboardCourses(
-		userId
-	);
-
+const MyCourses = async ({
+	courses,
+}: {
+	courses: CourseWithProgressWithCategory[];
+}) => {
 	return (
 		<div className='text-slate-700'>
 			{/* COURSE HEADER  */}
@@ -28,7 +22,7 @@ const MyCourses = async () => {
 			{/* COURSE LIST BOX  */}
 			<div className='mt-4 w-full'>
 				<div className='flex flex-col gap-[10px]'>
-					{[...coursesInProgress, ...completedCourses].map((course) => (
+					{courses.map((course) => (
 						<MyCourseItem key={course.id} course={course} />
 					))}
 				</div>

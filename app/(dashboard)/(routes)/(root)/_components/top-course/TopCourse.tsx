@@ -21,8 +21,8 @@ const TopCourse = async () => {
 
 			{/* COURSE LIST BOX  */}
 			<div className='mt-4'>
-				<div className='grid grid-cols-1 md:grid-cols-2 gap-[10px]'>
-					{topCourses.map((course) => (
+				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[10px]'>
+					{[...topCourses].map((course) => (
 						<CourseItem key={course.id} course={course} />
 					))}
 				</div>
