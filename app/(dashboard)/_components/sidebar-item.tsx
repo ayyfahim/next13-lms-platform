@@ -21,9 +21,9 @@ export const SidebarItem = ({ icon: Icon, label, href }: SidebarItemProps) => {
 		pathname === href ||
 		pathname?.startsWith(`${href}/`);
 
-	if (label == "Browse") {
-		isActive = pathname?.startsWith(`/courses/`) || pathname === "/search";
-	}
+	// if (label == "Browse") {
+	// 	isActive = pathname?.startsWith(`/courses/`) || pathname === "/search";
+	// }
 
 	// const onClick = () => {
 	// 	router.push(href);

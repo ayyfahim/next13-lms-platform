@@ -1,26 +1,10 @@
-import { auth } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
-import { CheckCircle, Clock } from "lucide-react";
-
-import { getDashboardCourses } from "@/actions/get-dashboard-courses";
-import { CoursesList } from "@/components/courses-list";
-
-import { InfoCard } from "./_components/info-card";
+import MyCourses from "./_components/my-courses/MyCourses";
+import TopCourse from "./_components/top-course/TopCourse";
 
 export default async function Dashboard() {
-	const { userId } = auth();
-
-	if (!userId) {
-		return redirect("/");
-	}
-
-	const { completedCourses, coursesInProgress } = await getDashboardCourses(
-		userId
-	);
-
 	return (
-		<div className='p-6 space-y-4'>
-			<div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+		<div className=''>
+			{/* <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
 				<InfoCard
 					icon={Clock}
 					label='In Progress'
@@ -32,8 +16,26 @@ export default async function Dashboard() {
 					numberOfItems={completedCourses.length}
 					variant='success'
 				/>
+			</div> */}
+			{/* <CoursesList items={[...coursesInProgress, ...completedCourses]} /> */}
+
+			{/* MAIN DASHBOARD CONTAINER  */}
+			<div className='flex flex-wrap'>
+				{/* LEFT SIDE */}
+				<div className='basis-[60%] grow py-[25px] pr-5'>
+					{/* TOP COURSE SECTION */}
+					<div className=''>
+						<TopCourse />
+					</div>
+
+					{/* MY COURSES SECTION */}
+					<div className='mt-5'>
+						<MyCourses />
+					</div>
+				</div>
+				{/* RIGHT SIDE */}
+				<div className='basis-[40%]'></div>
 			</div>
-			<CoursesList items={[...coursesInProgress, ...completedCourses]} />
 		</div>
 	);
 }
