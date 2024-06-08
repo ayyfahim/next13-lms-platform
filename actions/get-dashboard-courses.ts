@@ -7,6 +7,8 @@ export type CourseWithProgressWithCategory = Course & {
 	category: Category;
 	chapters: Chapter[];
 	progress: number | null;
+	totalLessons?: number;
+	completedLessons?: number;
 };
 
 type DashboardCourses = {
@@ -42,7 +44,9 @@ export const getDashboardCourses = async (
 
 		for (let course of courses) {
 			const progress = await getProgress(userId, course.id);
-			course["progress"] = progress;
+			course["progress"] = progress.progressPercentage;
+			course.totalLessons = progress.totalLessons;
+			course.completedLessons = progress.completedLessons;
 		}
 
 		const completedCourses = courses.filter(

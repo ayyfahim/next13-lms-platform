@@ -1,17 +1,13 @@
-import { getPurchase } from "@/actions/get-chapter";
 import { getProgress } from "@/actions/get-progress";
 import { CourseProgress } from "@/components/course/course-progress";
 import { IconBadge } from "@/components/icon-badge";
+import VideoJsPlayer from "@/components/VideoJsPlayer";
 import { db } from "@/lib/db";
 import { formatPrice } from "@/lib/format";
 import { auth } from "@clerk/nextjs";
 import { BookOpen } from "lucide-react";
 import { redirect } from "next/navigation";
 import { CourseEnrollButtonNew } from "./_components/course-enroll-button";
-import videojs from "video.js";
-import { useRef } from "react";
-import VideoPlayer from "@/components/VideoJsPlayer";
-import VideoJsPlayer from "@/components/VideoJsPlayer";
 
 const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
 	const { userId } = auth();
@@ -54,10 +50,10 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
 		},
 	});
 
-	let progressPercentage = null;
+	let progress = null;
 
 	if (userId && course) {
-		progressPercentage = await getProgress(userId, course.id);
+		progress = await getProgress(userId, course.id);
 	}
 
 	const cssAppliedContent = (body: string) => `
@@ -121,11 +117,15 @@ const CourseIdPage = async ({ params }: { params: { courseId: string } }) => {
 							</div>
 
 							<div className='mt-4'>
-								{progressPercentage !== null ? (
+								{progress?.progressPercentage !== null ? (
 									<CourseProgress
-										variant={progressPercentage === 100 ? "success" : "default"}
+										variant={
+											progress?.progressPercentage === 100
+												? "success"
+												: "default"
+										}
 										size='sm'
-										value={progressPercentage}
+										value={progress?.progressPercentage || 0}
 									/>
 								) : (
 									<p className='text-md md:text-sm font-medium text-slate-700'>

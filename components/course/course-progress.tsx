@@ -5,6 +5,9 @@ interface CourseProgressProps {
 	value: number;
 	variant?: "default" | "success";
 	size?: "default" | "sm";
+	className?: string;
+	textClassName?: string;
+	progressClassName?: string;
 }
 
 const colorByVariant = {
@@ -21,13 +24,21 @@ export const CourseProgress = ({
 	value,
 	variant,
 	size,
+	className,
+	textClassName,
+	progressClassName,
 }: CourseProgressProps) => {
 	return (
-		<div>
-			<Progress className='h-2' value={value} variant={variant} />
+		<div className={cn(className)}>
+			<Progress
+				className={cn("h-2", progressClassName)}
+				value={value}
+				variant={variant}
+			/>
 			<p
 				className={cn(
 					"font-medium mt-1 text-info",
+					textClassName,
 					colorByVariant[variant || "default"],
 					sizeByVariant[size || "default"]
 				)}>
