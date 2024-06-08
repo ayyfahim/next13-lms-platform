@@ -1,9 +1,11 @@
-import { auth } from "@clerk/nextjs";
+import { auth, UserButton } from "@clerk/nextjs";
 import MyCourses from "./_components/my-courses/MyCourses";
 import RightSideDashboard from "./_components/right-side/RightSideDashboard";
 import TopCourse from "./_components/top-course/TopCourse";
 import { redirect } from "next/navigation";
 import { getDashboardCourses } from "@/actions/get-dashboard-courses";
+import { getDayFromDayNumber } from "@/lib/utils";
+import { format, getDay } from "date-fns";
 
 export default async function Dashboard() {
 	const { userId } = auth();
@@ -32,9 +34,24 @@ export default async function Dashboard() {
 			{/* <CoursesList items={[...coursesInProgress, ...completedCourses]} /> */}
 
 			{/* MAIN DASHBOARD CONTAINER  */}
-			<div className='flex flex-wrap min-h-screen'>
+			<div className='flex flex-wrap min-h-screen flex-col md:flex-row'>
 				{/* LEFT SIDE */}
-				<div className='basis-[70%] grow py-[25px] pr-5'>
+				{/* HEADER GOES HERE (Only for small device) */}
+				<div className='md:hidden flex justify-between items-center pt-[10px] sm:pt-[25px] pr-2 sm:pr-5'>
+					<div className=''>
+						<h2 className='text-lg sm:text-xl text-slate-600'>
+							{getDayFromDayNumber(getDay(new Date()))}
+						</h2>
+						<p className='text-sm text-gray-500'>
+							{format(new Date(), "MMM dd, yyyy")}
+						</p>
+					</div>
+					<div className=''>
+						<UserButton afterSignOutUrl='/' />
+					</div>
+				</div>
+
+				<div className='basis-full md:basis-[70%] md:grow pt-3 sm:pt-[25px] pb-[25px] pr-2 sm:pr-5'>
 					{/* TOP COURSE SECTION */}
 					<div className=''>
 						<TopCourse />
@@ -46,7 +63,7 @@ export default async function Dashboard() {
 					</div>
 				</div>
 				{/* RIGHT SIDE */}
-				<div className='basis-[30%]'>
+				<div className='basis-full md:basis-[30%]'>
 					<RightSideDashboard
 						totalCourse={[...coursesInProgress, ...completedCourses].length}
 						coursesInProgress={coursesInProgress.length}

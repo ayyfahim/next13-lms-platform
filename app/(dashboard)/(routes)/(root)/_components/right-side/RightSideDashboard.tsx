@@ -3,6 +3,7 @@ import { getDayFromDayNumber } from "@/lib/utils";
 import { UserButton } from "@clerk/nextjs";
 import { format, getDay } from "date-fns";
 import { BookIcon, CheckCircle, GraduationCap } from "lucide-react";
+import InformationItem from "./InformationItem";
 
 const RightSideDashboard = ({
 	totalCourse,
@@ -14,9 +15,10 @@ const RightSideDashboard = ({
 	completedCourses: number;
 }) => {
 	return (
-		<div className='h-full border-l p-5'>
+		<div className='h-full md:border-l pr-5 md:p-5'>
 			{/* RIGHT HEADER  */}
-			<div className='flex justify-between items-center'>
+			{/* HIDDEN in small device */}
+			<div className='hidden md:flex justify-between items-center'>
 				<div className=''>
 					<h2 className='text-xl text-slate-600'>
 						{getDayFromDayNumber(getDay(new Date()))}
@@ -31,33 +33,28 @@ const RightSideDashboard = ({
 			</div>
 
 			{/* RIGHT USER STATS */}
-			<div className='mt-5'>
-				<h1 className='text-lg font-medium'>Overall Information</h1>
+			<div className='md:mt-5'>
+				<h1 className='text-lg md:font-medium'>Overall Information</h1>
 
-				<div className='mt-4 flex flex-col gap-4 '>
-					<div className='flex justify-between bg-white px-5 py-3 rounded-2xl border shadow-sm items-center'>
-						<div className='flex items-center gap-2'>
-							<IconBadge icon={GraduationCap} variant={"primary"} />
-							<p className='text-sm text-gray-500 font-semibold'>
-								Total courses
-							</p>
-						</div>
-						<p className='text-lg text-gray-700'>{totalCourse}</p>
-					</div>
-					<div className='flex justify-between bg-white px-5 py-3 rounded-2xl border shadow-sm items-center'>
-						<div className='flex items-center gap-2'>
-							<IconBadge icon={BookIcon} variant={"warning"} />
-							<p className='text-sm text-gray-500 font-semibold'>In Progress</p>
-						</div>
-						<p className='text-lg text-gray-700'>{coursesInProgress}</p>
-					</div>
-					<div className='flex justify-between bg-white px-5 py-3 rounded-2xl border shadow-sm items-center'>
-						<div className='flex items-center gap-2'>
-							<IconBadge icon={CheckCircle} variant={"success"} />
-							<p className='text-sm text-gray-500 font-semibold'>Completed</p>
-						</div>
-						<p className='text-lg text-gray-700'>{completedCourses}</p>
-					</div>
+				<div className='mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-2 md:gap-4'>
+					<InformationItem
+						icon={GraduationCap}
+						variant='primary'
+						title='Total Courses'
+						content={totalCourse?.toString()}
+					/>
+					<InformationItem
+						icon={BookIcon}
+						variant='warning'
+						title='In Progress'
+						content={coursesInProgress?.toString()}
+					/>
+					<InformationItem
+						icon={CheckCircle}
+						variant='success'
+						title='Completed'
+						content={completedCourses?.toString()}
+					/>
 				</div>
 			</div>
 		</div>

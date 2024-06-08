@@ -2,12 +2,8 @@ import { BookOpen, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { CourseProgress } from "@/components/course/course-progress";
-import { IconBadge } from "@/components/icon-badge";
-import { formatPrice } from "@/lib/format";
-import { Badge } from "../ui/badge";
 import star from "@/public/star.png";
-import { Tooltip } from "recharts";
+import { Badge } from "../ui/badge";
 
 interface CourseCardProps {
 	id: string;
@@ -33,10 +29,10 @@ const CourseCard2 = ({
 	const difficulityLevel = Math.floor(Math.random() * 3) + 1;
 
 	return (
-		<div className='group hover:shadow-sm transition overflow-hidden border rounded-[16px] p-4 h-full bg-white'>
+		<div className='group hover:shadow-sm transition overflow-hidden border rounded-[16px] p-2 sm:p-4 h-full bg-white'>
 			<Link href={`/courses/${id}`}>
 				{imageUrl ? (
-					<div className='relative w-full aspect-video rounded-[16px] overflow-hidden h-[150px]'>
+					<div className='relative w-full aspect-video rounded-[16px] overflow-hidden h-[100px] sm:h-[150px]'>
 						<Image
 							fill
 							className='object-cover h-full w-full group-hover:scale-110 duration-300'
@@ -45,7 +41,7 @@ const CourseCard2 = ({
 						/>
 					</div>
 				) : (
-					<div className='relative w-full aspect-video rounded-[16px] overflow-hidden h-[150px] flex justify-center items-center bg-gray-200'>
+					<div className='relative w-full aspect-video rounded-[16px] overflow-hidden h-[100px] sm:h-[150px] flex justify-center items-center bg-gray-200'>
 						<h1 className='text-lg'>No Cover</h1>
 					</div>
 				)}
@@ -53,7 +49,7 @@ const CourseCard2 = ({
 
 			<div className='flex flex-col mt-[10px]'>
 				{/* COURSE CARD TOP BAR  */}
-				<div className='flex justify-between gap-2 items-center'>
+				<div className='flex flex-col sm:flex-row sm:justify-between gap-2 sm:items-center'>
 					<div className='tag'>
 						<Badge
 							variant={

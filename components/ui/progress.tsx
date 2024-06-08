@@ -11,6 +11,10 @@ const progressVariants = cva("h-full w-full flex-1 bg-primary transition-all", {
 		variant: {
 			default: "bg-info",
 			success: "bg-success",
+			warning: "bg-warning",
+			danger: "bg-danger",
+			info: "bg-info",
+			primary: "bg-primary",
 		},
 	},
 	defaultVariants: {
@@ -28,7 +32,7 @@ type CombinedProgressProps = ProgressProps &
 const Progress = React.forwardRef<
 	React.ElementRef<typeof ProgressPrimitive.Root>,
 	CombinedProgressProps
->(({ className, value, variant, ...props }, ref) => (
+>(({ className, value, variant, children, ...props }, ref) => (
 	<ProgressPrimitive.Root
 		ref={ref}
 		className={cn(
@@ -40,6 +44,7 @@ const Progress = React.forwardRef<
 			className={cn(progressVariants({ variant }))}
 			style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
 		/>
+		{children}
 	</ProgressPrimitive.Root>
 ));
 Progress.displayName = ProgressPrimitive.Root.displayName;

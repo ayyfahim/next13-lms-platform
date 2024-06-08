@@ -18,6 +18,10 @@ module.exports = withUt({
 			},
 		},
 		extend: {
+			screens: {
+				"2xl": "1400px",
+				md: "780px",
+			},
 			colors: {
 				"light-black": "#171928",
 				purple: {

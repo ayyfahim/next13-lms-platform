@@ -43,7 +43,7 @@ export const SidebarItem = ({ icon: Icon, label, href }: SidebarItemProps) => {
 					)}>
 					<div className='flex items-center gap-x-2'>
 						<Icon size={22} className={cn("text-[#d9d9d9]")} />
-						{label}
+						<span className='hidden lg:inline-block'>{label}</span>
 					</div>
 				</button>
 			</Link>

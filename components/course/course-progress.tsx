@@ -8,6 +8,7 @@ interface CourseProgressProps {
 	className?: string;
 	textClassName?: string;
 	progressClassName?: string;
+	totalLessons?: number;
 }
 
 const colorByVariant = {
@@ -27,14 +28,26 @@ export const CourseProgress = ({
 	className,
 	textClassName,
 	progressClassName,
+	totalLessons,
 }: CourseProgressProps) => {
 	return (
 		<div className={cn(className)}>
 			<Progress
-				className={cn("h-2", progressClassName)}
+				className={cn("h-2 relative", progressClassName)}
 				value={value}
-				variant={variant}
-			/>
+				variant={variant}>
+				<div className='absolute left-0 top-0 z-50 w-full h-full'>
+					<div className={`flex h-full`}>
+						{Array.from({ length: totalLessons || 1 }).map((_, i) => (
+							<div
+								key={i}
+								className={cn(
+									`last:border-0 border-r border-white/70 h-full flex-1`
+								)}></div>
+						))}
+					</div>
+				</div>
+			</Progress>
 			<p
 				className={cn(
 					"font-medium mt-1 text-info",

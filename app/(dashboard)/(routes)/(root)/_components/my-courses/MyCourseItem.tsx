@@ -11,7 +11,7 @@ const MyCourseItem = ({
 }) => {
 	return (
 		<div className='rounded-[14px] shadow p-2 border bg-white'>
-			<div className='flex justify-between gap-2'>
+			<div className='flex sm:justify-between gap-2 flex-col sm:flex-row'>
 				{/* LEFT SIDE */}
 				<div className='flex items-center gap-3 grow'>
 					<div className=''>
@@ -25,7 +25,7 @@ const MyCourseItem = ({
 					</div>
 					<div className='grow'>
 						<h1 className='text-sm font-medium'>{course.title}</h1>
-						<div className='mt-1 text-sm text-gray-500'>
+						<div className='sm:mt-1 text-sm text-gray-500'>
 							{course.completedLessons || 0} out of {course.totalLessons || 0}{" "}
 							modules Completed.
 						</div>
@@ -33,8 +33,8 @@ const MyCourseItem = ({
 				</div>
 
 				{/* RIGHT SIDE  */}
-				<div className='flex items-center gap-2'>
-					<div className='min-w-[200px]'>
+				<div className='flex flex-col sm:flex-row sm:items-center gap-2'>
+					<div className='w-full sm:min-w-[200px]'>
 						{course.progress !== null ? (
 							<CourseProgress
 								textClassName='mt-0'
@@ -42,6 +42,7 @@ const MyCourseItem = ({
 								variant={course.progress === 100 ? "success" : "default"}
 								size='sm'
 								value={course.progress}
+								totalLessons={course.totalLessons}
 							/>
 						) : (
 							""

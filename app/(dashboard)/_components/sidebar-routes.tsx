@@ -5,9 +5,8 @@ import {
 	Book,
 	CreditCard,
 	Headphones,
-	Layout,
+	Home,
 	List,
-	Phone,
 	Settings,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -16,7 +15,7 @@ import { SidebarItem } from "./sidebar-item";
 
 const guestRoutes = [
 	{
-		icon: Layout,
+		icon: Home,
 		label: "Dashboard",
 		href: "/",
 	},

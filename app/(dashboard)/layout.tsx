@@ -9,17 +9,17 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 			<div className={cn("flex w-full flex-row flex-nowrap")}>
 				<div
 					className={cn(
-						"hidden md:flex basis-[320px] min-w-[320px] flex-col inset-y-0 z-50 sticky top-0"
+						"flex basis-[75px] sm:basis-[100px] lg:basis-[320px] min-w-[75px] sm:min-w-[100px] lg:min-w-[320px] flex-col inset-y-0 z-50 sticky top-0"
 					)}>
 					<div className='h-screen sticky top-0'>
 						{/* BEGIN: Sidebar container */}
-						<div className='p-5 h-full'>
+						<div className='p-2 sm:p-5 h-full'>
 							<Sidebar />
 						</div>
 						{/* END: Sidebar container */}
 					</div>
 				</div>
-				<main className={cn("min-h-screen grow")}>{children}</main>
+				<main className={cn("min-h-screen grow pb-2 sm:pb-5")}>{children}</main>
 			</div>
 		</div>
 	);
