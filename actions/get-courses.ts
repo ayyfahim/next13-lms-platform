@@ -1,13 +1,6 @@
-import { Category, Course } from "@prisma/client";
-
 import { getProgress } from "@/actions/get-progress";
 import { db } from "@/lib/db";
-
-type CourseWithProgressWithCategory = Course & {
-	category: Category | null;
-	chapters: { id: string }[];
-	progress: number | null;
-};
+import { CourseWithProgressWithCategory } from "./get-dashboard-courses";
 
 type GetCourses = {
 	userId: string;
@@ -34,9 +27,6 @@ export const getCourses = async ({
 				chapters: {
 					where: {
 						isPublished: true,
-					},
-					select: {
-						id: true,
 					},
 				},
 				purchases: {
@@ -73,5 +63,49 @@ export const getCourses = async ({
 	} catch (error) {
 		console.log("[GET_COURSES]", error);
 		return [];
+	}
+};
+
+export const getCourseById = async ({
+	courseId,
+	userId,
+}: {
+	courseId: string;
+	userId: string;
+}): Promise<CourseWithProgressWithCategory | null> => {
+	try {
+		const course = await db.course.findUnique({
+			where: {
+				id: courseId,
+			},
+			include: {
+				category: true,
+				chapters: {
+					where: {
+						isPublished: true,
+					},
+					orderBy: {
+						position: "asc",
+					},
+				},
+				purchases: true,
+			},
+		});
+
+		if (!course) {
+			return null;
+		}
+
+		const progress = await getProgress(userId, course.id);
+
+		return {
+			...course,
+			progress: progress.progressPercentage,
+			totalLessons: progress.totalLessons,
+			completedLessons: progress.completedLessons,
+		};
+	} catch (error) {
+		console.log("[GET_COURSE_BY_ID]", error);
+		return null;
 	}
 };

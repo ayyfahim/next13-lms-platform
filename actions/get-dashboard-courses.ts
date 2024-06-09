@@ -1,14 +1,15 @@
-import { Category, Chapter, Course } from "@prisma/client";
+import { Category, Chapter, Course, Purchase } from "@prisma/client";
 
 import { db } from "@/lib/db";
 import { getProgress } from "@/actions/get-progress";
 
 export type CourseWithProgressWithCategory = Course & {
-	category: Category;
+	category: Category | null;
 	chapters: Chapter[];
 	progress: number | null;
 	totalLessons?: number;
 	completedLessons?: number;
+	purchases?: Purchase[];
 };
 
 type DashboardCourses = {
